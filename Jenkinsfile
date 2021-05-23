@@ -1,10 +1,16 @@
 pipeline {
+    environment {
+    
+    image_name = "anchal72/test"
+    docker_image = ''
+    
+    }
     agent any
 
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                docker_image = docker.build image_name
             }
         }
         stage('Test') {
@@ -14,7 +20,11 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                script {
+		   docker.withRegistry("https://hub.docker.com",'docker_hub')
+		   docker_image.push("$BUILD_NUMBER")
+                   docker_image.push('latest')
+		}
             }
         }
     }
