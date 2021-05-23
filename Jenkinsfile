@@ -18,8 +18,15 @@ pipeline {
 	    }
         }
         stage('Test') {
+	     agent {
+		     docker {
+		     	image 'python:3.5.1'
+			args '-u root'
+		     }
+	     }
             steps {
                 echo 'Testing..'
+		sh 'python main.py'
             }
         }
         stage('Deploy') {
