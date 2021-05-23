@@ -13,7 +13,7 @@ pipeline {
             steps {
 		echo "Building..."
 		    script {
-			docker_image = docker.build image_name
+			docker_image = docker.build image_name + ":$BUILD_NUMBER" 
 		    }
 	    }
         }
@@ -25,9 +25,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-		   docker.withRegistry("https://hub.docker.com",'docker_hub')
-		   docker_image.push("$BUILD_NUMBER")
-                   docker_image.push('latest')
+			docker.withRegistry('','docker_hub') { 
+		   		docker_image.push("$BUILD_NUMBER")
+         
+			}
 		}
             }
         }
