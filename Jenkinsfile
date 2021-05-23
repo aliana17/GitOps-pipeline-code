@@ -9,11 +9,12 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent {
-            	   dockerfile true
-            }
+            
             steps {
-    	        echo "Building..."
+		echo "Building..."
+		    script {
+			docker_image = docker.build image_name
+		    }
 	    }
         }
         stage('Test') {
