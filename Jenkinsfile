@@ -10,8 +10,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                docker_image = docker.build image_name
-            }
+                script {
+		  docker_image = docker.build image_name
+                }
+	    }
         }
         stage('Test') {
             steps {
