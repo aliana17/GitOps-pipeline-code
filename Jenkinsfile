@@ -3,6 +3,8 @@ pipeline {
     
     image_name = "anchal72/test"
     docker_image = ''
+	    
+    job_name = currentBuild.fullDisplayName
     
     }
     agent any
@@ -27,6 +29,13 @@ pipeline {
             steps {
                 echo 'Testing..'
 		sh 'python main.py'
+		emailext (
+			subject: "STARTED: Job "${job_name} $BUILD_NUMBER",
+		        body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+			<p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+		        recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+    		)
+
             }
         }
         stage('Deploy') {
