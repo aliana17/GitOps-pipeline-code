@@ -30,7 +30,7 @@ pipeline {
 		sh 'python main.py'
             }
 	    post {
-		changed {
+		failure {
 			script{
 				if (currentBuild.result.toString().equals('FAILURE')) {
 					emailext body: 'Pipeline Failed ${currentBuild.result}' ,
