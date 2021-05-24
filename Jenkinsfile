@@ -30,14 +30,20 @@ pipeline {
 		sh 'python main.py'
 		
             }
-		when {
-			(currentBuild.result.toString().equals('FAILURE')) {
-				emailext body: 'Pipeline Failed ${currentBuild.result}' ,
-				    subject: 'Testing Failure ' ,
-				    to: 'agarwalanchal72@gmail.com'
-			}
-		}
+		
        	 }
+	 stage('Mail') {
+		 when {
+			 expression {
+				currentBuild.result.toString().equals('FAILURE')
+			 }
+		 }
+		 steps {
+		 	emailext body: 'Pipeline Failed ${currentBuild.result}' ,
+				 subject: 'Testing Failure ' ,
+				 to: 'agarwalanchal72@gmail.com'
+		 }
+	 }
         stage('Deploy') {
             steps {
                 script {
