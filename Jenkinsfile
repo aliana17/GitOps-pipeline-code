@@ -4,7 +4,6 @@ pipeline {
     image_name = "anchal72/test"
     docker_image = ''
 	    
-    job_name = currentBuild.fullDisplayName
     
     }
     agent any
@@ -32,8 +31,8 @@ pipeline {
 		
             }
 		when {
-			currentBuild.result.toString().equals('FAILURE') {
-				emailext body: 'Pipeline Failed ' + currentBuild.result.toString(),
+			(currentBuild.result.toString().equals('FAILURE')) {
+				emailext body: 'Pipeline Failed ${currentBuild.result}' + ,
 				    subject: 'Testing Failure ' ,
 				    to: 'agarwalanchal72@gmail.com'
 			}
