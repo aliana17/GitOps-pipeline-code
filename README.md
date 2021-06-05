@@ -7,9 +7,9 @@ Here are some easy steps to follow to create a GitOps pipeline.
 PS: I am creating this setup on AWS. 
 
 1. Install JENKINS on your machine. 
-sudo wget -O /etc/yum.repos.d/jenkins.repo     https://pkg.jenkins.io/redhat-stable/jenkins.repo
-sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-sudo yum install jenkins -y 
+  - sudo wget -O /etc/yum.repos.d/jenkins.repo     https://pkg.jenkins.io/redhat-stable/jenkins.repo
+  - sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+  - sudo yum install jenkins -y 
 
 2. Open Jenkins Dashboard
 http://<IP>:8080
