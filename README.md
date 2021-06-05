@@ -9,7 +9,9 @@ PS: I am creating this setup on AWS.
 1. Install JENKINS on your machine. 
   - sudo wget -O /etc/yum.repos.d/jenkins.repo     https://pkg.jenkins.io/redhat-stable/jenkins.repo
   - sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-  - sudo yum install jenkins -y 
+  - sudo yum install jenkins java-1.8.0-openjdk-devel -y
+  - sudo systemctl daemon-reload
+  - sudo systemctl start jenkins
 
 2. Open Jenkins Dashboard
 http://<IP>:8080
